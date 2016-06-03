@@ -2,10 +2,14 @@ package webdrivers;
 
 import com.codeborne.selenide.WebDriverProvider;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import static loggers.AllureStep.logToAllure;
 import static org.openqa.selenium.firefox.FirefoxDriver.PROFILE;
 
 public class FirefoxCustomDriver implements WebDriverProvider {
@@ -17,12 +21,16 @@ public class FirefoxCustomDriver implements WebDriverProvider {
 
         firefoxProfile.setPreference("browser.fullscreen.autohide",true);
         firefoxProfile.setPreference("browser.fullscreen.animateUp",0);
-        firefoxProfile.setPreference("network.negotiate-auth.trusted-uris", "http://, https://");
-        firefoxProfile.setPreference("network.negotiate-auth.delegation-uris", "http://, https://");
 
         desiredCapabilities.setCapability(PROFILE, firefoxProfile);
 
-        return new FirefoxDriver(desiredCapabilities);
+        String hubUrl = "http://172.16.101.77:4444/wd/hub";
+        try {
+            return new RemoteWebDriver(new URL(hubUrl), desiredCapabilities);
+        } catch (MalformedURLException e) {
+            logToAllure("ошибка при обработке ссылки " + hubUrl, e);
+            return new RemoteWebDriver(desiredCapabilities);
+        }
     }
 
 }

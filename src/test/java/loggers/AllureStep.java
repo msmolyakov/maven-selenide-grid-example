@@ -11,6 +11,11 @@ public class AllureStep {
     }
 
     @Step("{0}")
+    public static void logToAllure(String log, Exception e) {
+        System.out.println(log + " : " + e);
+    }
+
+    @Step("{0}")
     public static void logToAllure(String log, Description description) {
         System.out.println(description + " : " + log);
     }
