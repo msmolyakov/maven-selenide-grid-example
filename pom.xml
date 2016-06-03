@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ru.solit_clouds</groupId>
+    <artifactId>sc</artifactId>
+    <version>0.1-SNAPSHOT</version>
+
+    <properties>
+        <junit.junit>4.12</junit.junit>
+        <org.hamcrest.hamcrest-junit>2.0.0.0</org.hamcrest.hamcrest-junit>
+        <com.codeborne.selenide>3.6</com.codeborne.selenide>
+        <org.apache.maven.plugins.maven-surefire-plugin>2.19.1</org.apache.maven.plugins.maven-surefire-plugin>
+        <ru.yandex.qatools.allure.allure-junit-adaptor>1.4.23</ru.yandex.qatools.allure.allure-junit-adaptor>
+        <org.aspectj.aspectjweaver>1.8.7</org.aspectj.aspectjweaver>
+        <org.apache.maven.plugins.maven-compiler-plugin>3.3</org.apache.maven.plugins.maven-compiler-plugin>
+        <java.version>1.7</java.version>
+        <ru.yandex.qatools.allure.allure-maven-plugin>2.5</ru.yandex.qatools.allure.allure-maven-plugin>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.junit}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-junit</artifactId>
+            <version>${org.hamcrest.hamcrest-junit}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>${com.codeborne.selenide}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>${org.apache.maven.plugins.maven-surefire-plugin}</version>
+        </dependency>
+        <dependency>
+            <groupId>ru.yandex.qatools.allure</groupId>
+            <artifactId>allure-junit-adaptor</artifactId>
+            <version>${ru.yandex.qatools.allure.allure-junit-adaptor}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${org.apache.maven.plugins.maven-surefire-plugin}</version>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <argLine>
+                        -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${org.aspectj.aspectjweaver}/aspectjweaver-${org.aspectj.aspectjweaver}.jar
+                    </argLine>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>ru.yandex.qatools.allure.junit.AllureRunListener</value>
+                        </property>
+                    </properties>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${org.aspectj.aspectjweaver}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-junit47</artifactId>
+                        <version>${org.apache.maven.plugins.maven-surefire-plugin}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${org.apache.maven.plugins.maven-compiler-plugin}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <reporting>
+        <excludeDefaults>true</excludeDefaults>
+        <plugins>
+            <plugin>
+                <groupId>ru.yandex.qatools.allure</groupId>
+                <artifactId>allure-maven-plugin</artifactId>
+                <version>${ru.yandex.qatools.allure.allure-maven-plugin}</version>
+            </plugin>
+        </plugins>
+    </reporting>
+
+</project>
