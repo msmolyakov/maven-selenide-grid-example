@@ -1,0 +1,23 @@
+{
+  "capabilities": [
+    {
+      "browserName": "firefox",
+      "acceptSslCerts": true,
+      "javascriptEnabled": true,
+      "browser-version": "24",
+      "maxInstances": 1,
+      "cleanSession": true
+    }
+  ],
+  "configuration": {
+    "_comment" : "Configuration for Node",
+    "cleanUpCycle": 2000,
+    "timeout": 30000,
+    "proxy": "org.openqa.grid.selenium.proxy.WebDriverRemoteProxy",
+    "port": 5555,
+    "host": "172.16.101.102",
+    "register": true,
+    "hubPort": 4444,
+    "maxSessions": 5
+  }
+}

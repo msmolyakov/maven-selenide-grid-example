@@ -1,0 +1,14 @@
+{"_comment" : "Configuration for Hub - gridHubConfig.json",
+  "host": "172.16.101.77",
+  "port": 4444,
+  "cleanupCycle": 5000,
+  "maxSessions": 5,
+  "timeout": 300000,
+  "newSessionWaitTimeout": -1,
+  "prioritizer": null,
+  "capabilityMatcher": "org.openqa.grid.internal.utils.DefaultCapabilityMatcher",
+  "throwOnCapabilityNotPresent": true,
+  "nodePolling": 180000,
+  "platform": "WINDOWS",
+  "servlets": []
+}
