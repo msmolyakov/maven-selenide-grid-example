@@ -38,7 +38,7 @@ public class CommonRule extends TestWatcher {
         open(host);
     }
 
-    private static class MyGridFirefoxProvider implements WebDriverProvider {
+    public static class MyGridFirefoxProvider implements WebDriverProvider {
 
         @Override
         public WebDriver createDriver(DesiredCapabilities capabilities) {
