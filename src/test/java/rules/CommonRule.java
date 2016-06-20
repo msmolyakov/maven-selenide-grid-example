@@ -9,7 +9,6 @@ import org.junit.AssumptionViolatedException;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import ru.yandex.qatools.allure.annotations.Attachment;
@@ -20,9 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static loggers.AllureStep.logToAllure;
-import static org.openqa.selenium.firefox.FirefoxDriver.PROFILE;
 
 public class CommonRule extends TestWatcher {
 
@@ -37,25 +34,16 @@ public class CommonRule extends TestWatcher {
         System.out.println("START " + description);
 
         Configuration.browser = MyGridFirefoxProvider.class.getName();
-        open(host);
 
-        getWebDriver().manage().window().maximize();
+        open(host);
     }
 
     private static class MyGridFirefoxProvider implements WebDriverProvider {
 
         @Override
         public WebDriver createDriver(DesiredCapabilities capabilities) {
-            FirefoxProfile firefoxProfile = new FirefoxProfile();
-
-            firefoxProfile.setPreference("browser.fullscreen.autohide", false);
-            firefoxProfile.setPreference("browser.fullscreen.animateUp", 0);
-
-            capabilities.setCapability(PROFILE, firefoxProfile);
-            capabilities.setBrowserName("firefox");
-
             try {
-                return new RemoteWebDriver(new URL("http://172.16.101.77:4444/wd/hub"), capabilities);
+                return new RemoteWebDriver(new URL("http://172.16.101.126:4444/wd/hub"), DesiredCapabilities.firefox());
             }
             catch (MalformedURLException e) {
                 throw new RuntimeException(e);
@@ -71,7 +59,7 @@ public class CommonRule extends TestWatcher {
 
     @Override
     protected void failed(Throwable e, Description description) {
-        File lastSelenideScreenshot = Screenshots.getLastScreenshot();
+        File lastSelenideScreenshot = Screenshots.getScreenShotAsFile();
         if (lastSelenideScreenshot != null) {
             try {
                 screenshot(Files.toByteArray(lastSelenideScreenshot));

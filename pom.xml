@@ -11,7 +11,7 @@
     <properties>
         <junit.junit>4.12</junit.junit>
         <org.hamcrest.hamcrest-junit>2.0.0.0</org.hamcrest.hamcrest-junit>
-        <com.codeborne.selenide>3.6</com.codeborne.selenide>
+        <com.codeborne.selenide>2.18.2</com.codeborne.selenide>
         <org.apache.maven.plugins.maven-surefire-plugin>2.19.1</org.apache.maven.plugins.maven-surefire-plugin>
         <ru.yandex.qatools.allure.allure-junit-adaptor>1.4.23</ru.yandex.qatools.allure.allure-junit-adaptor>
         <org.aspectj.aspectjweaver>1.8.7</org.aspectj.aspectjweaver>
